@@ -31,7 +31,7 @@ jobs:
       run: docker pull saan09/cd_pipeline:latest
 
     - name: Deploy on EC2
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@main
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
