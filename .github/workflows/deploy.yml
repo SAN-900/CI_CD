@@ -33,10 +33,10 @@ jobs:
     - name: Deploy on EC2
       uses: appleboy/ssh-action@master
       with:
-         host: ${{ secrets.SSH_HOST }}
-         username: ${{ secrets.SSH_USERNAME }}
-         key: ${{ secrets.SSH_KEY }}
-         scripts: |
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        scripts: |
            sudo docker pull saan09/cd_pipeline:latest
            sudo docker stop cd_pipeline || true
            sudo docker rm cd_pipeline || true
