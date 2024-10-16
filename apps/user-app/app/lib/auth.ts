@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export const authOptions = {
     providers: [
       CredentialsProvider({
-          name: 'Credentials',
+          name: 'Phone Number',
           credentials: {
             phone: { label: "Phone number", type: "text", placeholder: "1231231231", required: true },
             password: { label: "Password", type: "password", required: true }
@@ -39,6 +39,14 @@ export const authOptions = {
                         password: hashedPassword
                     }
                 });
+
+                const balance = await db.balance.create({
+                    data: {
+                        amount: 0,
+                        userId: user.id,
+                        locked: 0
+                    }
+                })
             
                 return {
                     id: user.id.toString(),
