@@ -1,0 +1,31 @@
+name: Build & Deploy on docker hub
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out Repo
+      uses: actions/checkout@v2
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action/checkout@v1
+      with:
+         username: ${{ secrets.DOCKER_USERNAME }}
+         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build & push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./docker/Dockerfile.user
+        push: true
+        tags: saan09/cd_pipeline:latest
+
+    - name: Verify Pushed Image
+      run: docker pull saan09/cd_pipeline:latest
