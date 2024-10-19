@@ -40,4 +40,4 @@ jobs:
           sudo docker pull saan09/cd_pipeline:latest
           sudo docker stop web-app || true
           sudo docker rm web-app || true
-          sudo docker run -d --name web-app -p 3005:3000 saan09/cd_pipeline:latest
+          sudo docker run -d -e DATABASE_URL=${{secrets.DB_URL}} --restart always --name web-app -p 3005:3000 saan09/cd_pipeline:latest
